@@ -1,0 +1,1 @@
+export let EMAIL_DOMAIN = "inmar.com";

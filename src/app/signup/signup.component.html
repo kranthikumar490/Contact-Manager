@@ -1,33 +1,74 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="text-center">
-                    <h1>Signup</h1>
-                    <h6>Register yourself!!!</h6>
-                </div>
-                <form [formGroup]="signupForm" (ngSubmit)="signUp()">
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Full Name</label>
-                        <input formControlName="fullname" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Mobile Number</label>
-                        <input formControlName="mobile" type="Number" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Password</label>
-                      <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary login-btn">Sign up</button>
-                  </form>
-                  <a class="suggest-link" routerLink="/login">Already registered? Click to Login!!</a>
-            </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="text-center">
+          <h1>Signup</h1>
         </div>
+        <form [formGroup]="signupForm" (ngSubmit)="signUp()">
+          <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input
+              formControlName="firstname"
+              type="text"
+              class="form-control"
+              id="firstname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input
+              formControlName="lastname"
+              type="text"
+              class="form-control"
+              id="lastname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="aadhar">Aadhar Number</label>
+            <input
+              formControlName="aadhar"
+              type="text"
+              class="form-control"
+              id="aadhar"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="email"
+            />
+            <span
+              *ngIf="
+                (signupForm.get('email').dirty ||
+                  signupForm.get('email').touched) &&
+                signupForm.get('email').invalid
+              "
+            >
+              Only URLs served over HTTPS and from the .io top-level domain are
+              accepted.
+            </span>
+          </div>
+          <div class="form-group">
+            <label for="pssword">Password</label>
+            <input
+              formControlName="password"
+              type="password"
+              class="form-control"
+              id="password"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary login-btn">
+            Sign up
+          </button>
+        </form>
+        <a class="suggest-link" routerLink="/login"
+          >Already registered? Click to Login!!</a
+        >
+      </div>
     </div>
+  </div>
 </div>

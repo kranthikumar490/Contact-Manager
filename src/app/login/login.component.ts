@@ -22,17 +22,13 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.http.get<any>("http://localhost:3000/signupUsers").subscribe(res=>{
-      const user = res.find((a:any)=>{
-        return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password;
-      });
-      if(user){
-        alert('Login Success');
-        this.loginForm.reset();
-        this.router.navigate(['dashboard'])
-      } else {
-        alert('User not found')
-      }
+    this.http.post<any>("https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDyg0QrEJK7X1Z6F1YTObRXYnM0dfn-9qM", {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+      returnSecureToken: true
+    }).subscribe(res=>{
+      this.loginForm.reset();
+      this.router.navigate(['dashboard'])
     }, err =>{
       alert('Something went wrong')
     })

@@ -44,9 +44,21 @@ export class SignupComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          alert('Signup successfully');
-          this.signupForm.reset();
-          this.router.navigate(['login']);
+          this.http
+            .post(
+              'https://contact-manager-3dbcd-default-rtdb.asia-southeast1.firebasedatabase.app/users.json',
+              {
+                firstname: this.signupForm.value.firstname,
+                lastname: this.signupForm.value.lastname,
+                aadhar: this.signupForm.value.aadhar,
+                email: this.signupForm.value.email,
+              }
+            )
+            .subscribe((res) => {
+              alert('Signup successfully');
+              this.signupForm.reset();
+              this.router.navigate(['login']);
+            });
         },
         (err) => {
           alert('something went wrong');

@@ -2,7 +2,7 @@
     <div class="container-fluid crud-container">
         <h1>Contact Manager</h1>
         <div class="d-flex">
-          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add Employee Group</button>
+          <button (click)="clickAddEmployee()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add Employee Group</button>
         </div>
     </div>
 </nav>
@@ -20,16 +20,16 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Madhan</td>
-            <td>Manickam</td>
-            <td>madhan@inmar.com</td>
-            <td>9999999999</td>
-            <td>$ 50,000</td>
+        <tr *ngFor="let row of employeeData">
+            <td>{{row.id}}</td>
+            <td>{{row.firstName}}</td>
+            <td>{{row.lastName}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.mobile}}</td>
+            <td>{{row.salary}}</td>
             <td>
-                <button class="btn btn-info">Edit</button>
-                <button class="btn btn-danger mx-3">Delete</button>
+                <button (click)="onEdit(row)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+                <button (click)="deleteEmployee(row)" class="btn btn-danger mx-3">Delete</button>
             </td>
         </tr>
     </tbody>
@@ -47,29 +47,30 @@
             <form [formGroup]="formValue">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <input formControlName="firstName" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Last Name</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <input formControlName="lastName" type="text" class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Email ID</label>
-                    <input type="email" class="form-control" id="exampleInputPassword1">
+                    <input formControlName="email" type="email" class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Mobile No</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1">
+                    <input formControlName="mobile" type="number" class="form-control" id="exampleInputPassword1">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Salary</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1">
+                    <input formControlName="salary" type="number" class="form-control" id="exampleInputPassword1">
                 </div>
               </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Add</button>
+          <button id="cancel" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button *ngIf="showAdd" (click)="postEmployeeDetails()" type="button" class="btn btn-primary">Add</button>
+          <button *ngIf="showUpdate" (click)="updateEmployeeDetails()" type="button" class="btn btn-primary">Update</button>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
+import { GroupContactsComponent } from './group-contacts/group-contacts.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -18,8 +19,12 @@ const routes: Routes = [{
   component: SignupComponent
 },
 {
-  path: 'dashboard',
+  path: 'groups',
   component: EmployeeDashboardComponent
+},
+{
+  path: 'groups/:id',
+  component: GroupContactsComponent
 }];
 
 @NgModule({

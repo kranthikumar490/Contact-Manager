@@ -61,7 +61,7 @@
               id="password"
             />
           </div>
-          <button type="submit" class="btn btn-primary login-btn">
+          <button type="submit" class="btn btn-primary login-btn" [disabled]="signupForm.invalid">
             Sign up
           </button>
         </form>

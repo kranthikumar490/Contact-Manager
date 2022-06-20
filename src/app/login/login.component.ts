@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       returnSecureToken: true
     }).subscribe(res=>{
       this.loginForm.reset();
-      this.router.navigate(['dashboard'])
+      this.router.navigate(['groups'])
     }, err =>{
       alert('Something went wrong')
     })

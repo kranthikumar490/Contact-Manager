@@ -8,13 +8,15 @@ import { SignupComponent } from './signup/signup.component';
 import { EmployeeDashboardComponent } from './employee-dashboard/employee-dashboard.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { GroupContactsComponent } from './group-contacts/group-contacts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    EmployeeDashboardComponent
+    EmployeeDashboardComponent,
+    GroupContactsComponent
   ],
   imports: [
     BrowserModule,

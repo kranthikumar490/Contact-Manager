@@ -60,8 +60,23 @@
               class="form-control"
               id="password"
             />
+            <span
+              *ngIf="
+                (signupForm.get('password').dirty ||
+                  signupForm.get('password').touched) &&
+                signupForm.get('password').invalid
+              "
+            >
+              Password must contain a minimum of eight characters, at least one
+              uppercase letter, one lowercase letter, one number and one special
+              character
+            </span>
           </div>
-          <button type="submit" class="btn btn-primary login-btn" [disabled]="signupForm.invalid">
+          <button
+            type="submit"
+            class="btn btn-primary login-btn"
+            [disabled]="signupForm.invalid"
+          >
             Sign up
           </button>
         </form>

@@ -9,6 +9,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { GroupContactsComponent } from './group-contacts/group-contacts.component';
+import { SearchFilterPipe } from './search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { GroupContactsComponent } from './group-contacts/group-contacts.componen
     SignupComponent,
     GroupsComponent,
     GroupContactsComponent,
+    SearchFilterPipe,
   ],
   imports: [
     BrowserModule,

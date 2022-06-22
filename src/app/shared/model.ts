@@ -5,6 +5,7 @@ export class Contact {
   email!: string;
   mobile!: string;
   groupId!: string;
+  isActive: boolean = true;
 }
 
 export class Group {

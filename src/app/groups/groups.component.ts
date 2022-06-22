@@ -20,6 +20,7 @@ export class GroupsComponent implements OnInit {
   contact!: Contact;
   selectedGroup!: Group;
   groupNameForEdit!: string;
+  searchText: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private api: ApiService,
@@ -86,18 +87,14 @@ export class GroupsComponent implements OnInit {
   }
 
   deactivateGroup(group: Group) {
-    this.isStatusChangeInProcess = true;
     this.api.toggleGroupStatus(group.id, false).subscribe((res) => {
       this.getAllGroups();
-      this.isStatusChangeInProcess = false;
       alert('group is inactive');
     });
   }
 
   activateGroup(group: Group) {
-    this.isStatusChangeInProcess = true;
     this.api.toggleGroupStatus(group.id, true).subscribe((res) => {
-      this.isStatusChangeInProcess = false;
       this.getAllGroups();
       alert('group is active');
     });

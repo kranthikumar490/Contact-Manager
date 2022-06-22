@@ -18,6 +18,22 @@
 </nav>
 
 <section>
+  <div class="container-fluid navbar">
+    <h2>Groups</h2>
+    <div class="mx-3 d-flex">
+      <input
+        type="text"
+        name="search"
+        id="search"
+        [(ngModel)]="searchText"
+        class="form-control"
+        placeholder="search"
+      />
+    </div>
+  </div>
+</section>
+
+<section>
   <div class="card" *ngIf="showAdd">
     <div class="card-body">
       <form [formGroup]="groupForm">
@@ -42,9 +58,12 @@
       </form>
     </div>
   </div>
-  <div class="card" *ngFor="let group of groups">
+  <div
+    class="card"
+    *ngFor="let group of groups | searchFilter: searchText:'groupName'"
+  >
     <div class="card-body row" [ngClass]="{ inactive: !group.isActive }">
-      <div [ngClass]=" group.isEditing ? 'col-12' : 'col-md-6 col-sm-3'">
+      <div [ngClass]="group.isEditing ? 'col-12' : 'col-md-6 col-sm-3'">
         <a
           [routerLink]="[group.id]"
           class="link-primary"
@@ -54,7 +73,13 @@
         >
         <ng-template #editInput>
           <input type="text" [(ngModel)]="groupNameForEdit" />
-          <button type="button" class="btn btn-primary mx-3" (click)="editGroup(group)">Save</button>
+          <button
+            type="button"
+            class="btn btn-primary mx-3"
+            (click)="editGroup(group)"
+          >
+            Save
+          </button>
         </ng-template>
       </div>
       <div class="col-md-6 col-sm-9 action-group" *ngIf="!group.isEditing">
@@ -71,12 +96,6 @@
           *ngIf="group.isActive; else activateBtn"
         >
           Deactivate
-          <span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-            *ngIf="isStatusChangeInProcess"
-          ></span>
         </button>
         <ng-template #activateBtn>
           <button
@@ -130,9 +149,7 @@
       <div class="modal-body">
         <form [formGroup]="contactForm">
           <div class="mb-3">
-            <label for="firstname" class="form-label"
-              >First Name</label
-            >
+            <label for="firstname" class="form-label">First Name</label>
             <input
               formControlName="firstName"
               type="text"
@@ -142,9 +159,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="lastname" class="form-label"
-              >Last Name</label
-            >
+            <label for="lastname" class="form-label">Last Name</label>
             <input
               formControlName="lastName"
               type="text"
@@ -153,9 +168,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label"
-              >Email ID</label
-            >
+            <label for="email" class="form-label">Email ID</label>
             <input
               formControlName="email"
               type="email"
@@ -164,9 +177,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="mobile" class="form-label"
-              >Mobile No</label
-            >
+            <label for="mobile" class="form-label">Mobile No</label>
             <input
               formControlName="mobile"
               type="number"

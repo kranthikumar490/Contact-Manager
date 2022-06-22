@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
       lastname: ['', Validators.required],
       aadhar: ['', Validators.required],
       email: ['', [Validators.required, this.validateEmailDomain]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, this.passwordValidation]],
     });
   }
 
@@ -73,6 +73,15 @@ export class SignupComponent implements OnInit {
     );
     if (!regex.test(control.value)) {
       return { invalidEmail: true };
+    }
+    return null;
+  }
+
+  passwordValidation(control: AbstractControl) {
+    var regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W\_])[A-Za-z\d\W\_]{8,}$/;
+    if (!regex.test(control.value)) {
+      return { invalidPassword: true };
     }
     return null;
   }

@@ -16,6 +16,7 @@ export class GroupContactsComponent implements OnInit {
   showAdd!: boolean;
   showUpdate!: boolean;
   groupId!: string;
+  searchText: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private api: ApiService,
@@ -37,6 +38,7 @@ export class GroupContactsComponent implements OnInit {
   createContact() {
     const contact = this.contactForm.value;
     contact.groupId = this.groupId;
+    contact.isActive = true;
 
     this.api.createContact(contact).subscribe(
       (res) => {
@@ -57,13 +59,8 @@ export class GroupContactsComponent implements OnInit {
     this.api.getContactsOfGroup(this.groupId).subscribe((res) => {
       this.contacts = [];
       for (let id in res) {
-        const contact = new Contact();
+        const contact = res[id];
         contact.id = id;
-        contact.email = res[id].email;
-        contact.firstName = res[id].firstName;
-        contact.lastName = res[id].lastName;
-        contact.groupId = res[id].groupId;
-        contact.mobile = res[id].mobile;
         this.contacts.push(contact);
       }
     });
@@ -103,5 +100,19 @@ export class GroupContactsComponent implements OnInit {
   logout() {
     this.api.setUserDetails(null);
     this.router.navigate(['login']);
+  }
+
+  deactivateContact(contact: Contact) {
+    this.api.toggleContactStatus(contact.id, false).subscribe((res) => {
+      this.getContactsOfGroup();
+      alert('Contact is inactive');
+    });
+  }
+
+  activateContact(contact: Contact) {
+    this.api.toggleContactStatus(contact.id, true).subscribe((res) => {
+      this.getContactsOfGroup();
+      alert('Contact is active');
+    });
   }
 }

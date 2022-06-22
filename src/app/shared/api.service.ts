@@ -155,6 +155,23 @@ export class ApiService {
       );
   }
 
+  toggleContactStatus(id: string, isActive: boolean) {
+    return this.http
+      .patch(
+        'https://contact-manager-3dbcd-default-rtdb.asia-southeast1.firebasedatabase.app/contacts/' +
+          id +
+          '.json',
+        {
+          isActive: isActive,
+        }
+      )
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
   deleteContact(id: string) {
     return this.http
       .delete<any>(

@@ -7,3 +7,16 @@
 .action-group {
   text-align: right;
 }
+.card-body.inactive:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  opacity: 0.7;
+}
+.activate-btn {
+  position: relative;
+}

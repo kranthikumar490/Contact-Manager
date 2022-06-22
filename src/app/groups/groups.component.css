@@ -1,0 +1,29 @@
+.crud-container {
+  background-color: hsla(205, 46%, 30%, 1);
+}
+.crud-container h1 {
+  color: aliceblue;
+}
+.card .card-body a {
+  text-decoration: none;
+}
+.create-group-btn {
+  margin-right: 1em;
+}
+
+.card-body.inactive:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  opacity: 0.7;
+}
+.activate-btn {
+  position: relative;
+}
+.action-group{
+  text-align: right;
+}

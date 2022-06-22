@@ -1,0 +1,9 @@
+.crud-container {
+  background-color: hsla(205, 46%, 30%, 1);
+}
+.crud-container h1 {
+  color: aliceblue;
+}
+.action-group {
+  text-align: right;
+}

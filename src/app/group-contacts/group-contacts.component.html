@@ -1,1 +1,139 @@
-<p>group-contacts works!</p>
+<nav class="navbar navbar-light">
+  <div class="container-fluid crud-container">
+    <h1>Contact Manager</h1>
+    <div class="d-flex">
+      <button (click)="logout()" type="button" class="btn btn-primary">
+        Logout
+      </button>
+      <a class="btn btn-primary mx-3" routerLink="/groups" role="button"
+        >Groups</a
+      >
+      <button
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#createContactModal"
+        class="btn btn-success"
+      >
+        Create Contact
+      </button>
+    </div>
+  </div>
+</nav>
+
+<section>
+  <div class="card" *ngFor="let contact of contacts">
+    <div class="card-body row">
+      <div class="col-md-6 col-sm-3">
+        {{ contact.firstName + " " + contact.lastName }}
+      </div>
+      <div class="col-md-6 col-sm-9 action-group">
+        <button
+          (click)="editContact(contact)"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#createContactModal"
+          class="btn btn-info"
+        >
+          Edit
+        </button>
+        <button (click)="deleteContact(contact)" class="btn btn-danger mx-3">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="createContactModal"
+  tabindex="-1"
+  aria-labelledby="createContactModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createContactModalLabel">
+          Create a Contact
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="contactForm">
+          <div class="mb-3">
+            <label for="firstname" class="form-label">First Name</label>
+            <input
+              formControlName="firstName"
+              type="text"
+              class="form-control"
+              id="firstname"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="lastname" class="form-label">Last Name</label>
+            <input
+              formControlName="lastName"
+              type="text"
+              class="form-control"
+              id="lastname"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email ID</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="mobile" class="form-label">Mobile No</label>
+            <input
+              formControlName="mobile"
+              type="number"
+              class="form-control"
+              id="mobile"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="cancel"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="(closeModal)"
+        >
+          Close
+        </button>
+        <button
+          (click)="createContact()"
+          type="button"
+          class="btn btn-primary"
+          *ngIf="!showUpdate; else updateBtn"
+        >
+          Add
+        </button>
+        <ng-template #updateBtn>
+          <button
+            (click)="updateContactDetails()"
+            type="button"
+            class="btn btn-primary"
+          >
+            Update
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

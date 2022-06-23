@@ -43,7 +43,6 @@ export class GroupContactsComponent implements OnInit {
     this.api.createContact(contact).subscribe(
       (res) => {
         console.log(res);
-        alert('Contact created Successfully');
         let ref = document.getElementById('cancel');
         ref?.click();
         this.contactForm.reset();
@@ -67,10 +66,14 @@ export class GroupContactsComponent implements OnInit {
   }
 
   deleteContact(contact: Contact) {
-    this.api.deleteContact(contact.id).subscribe((res) => {
-      this.getContactsOfGroup();
-      alert('Contact Deleted');
-    });
+    this.api.deleteContact(contact.id).subscribe(
+      (res) => {
+        this.getContactsOfGroup();
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 
   editContact(contact: Contact) {
@@ -83,14 +86,18 @@ export class GroupContactsComponent implements OnInit {
     const contact = this.contactForm.value;
     contact.groupId = this.groupId;
     contact.id = this.selectedContact.id;
-    this.api.updateContact(contact).subscribe((res) => {
-      this.getContactsOfGroup();
-      this.showUpdate = false;
-      this.contactForm.reset();
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      alert('Contact updated');
-    });
+    this.api.updateContact(contact).subscribe(
+      (res) => {
+        this.getContactsOfGroup();
+        this.showUpdate = false;
+        this.contactForm.reset();
+        let ref = document.getElementById('cancel');
+        ref?.click();
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 
   closeModal() {
@@ -103,16 +110,24 @@ export class GroupContactsComponent implements OnInit {
   }
 
   deactivateContact(contact: Contact) {
-    this.api.toggleContactStatus(contact.id, false).subscribe((res) => {
-      this.getContactsOfGroup();
-      alert('Contact is inactive');
-    });
+    this.api.toggleContactStatus(contact.id, false).subscribe(
+      (res) => {
+        this.getContactsOfGroup();
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 
   activateContact(contact: Contact) {
-    this.api.toggleContactStatus(contact.id, true).subscribe((res) => {
-      this.getContactsOfGroup();
-      alert('Contact is active');
-    });
+    this.api.toggleContactStatus(contact.id, true).subscribe(
+      (res) => {
+        this.getContactsOfGroup();
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 }

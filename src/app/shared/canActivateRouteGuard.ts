@@ -17,7 +17,9 @@ export class CanActivateRouteGuard implements CanActivate {
     if (this.auth.isUserLoggedIn()) {
       return true;
     } else {
-      window.alert("You don't have permission to view this page");
+      alert(
+        "You don't have permission to view this page. Please try logging in"
+      );
       this.router.navigateByUrl('/login');
       return false;
     }

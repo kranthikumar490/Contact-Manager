@@ -51,7 +51,6 @@ export class GroupsComponent implements OnInit {
         this.showAdd = false;
         this.getAllGroups();
         this.groupForm.reset();
-        alert('Group Created Successfully');
       },
       (err) => {
         alert('Something went wrong');
@@ -71,10 +70,14 @@ export class GroupsComponent implements OnInit {
   }
 
   deleteGroup(group: Group) {
-    this.api.deleteGroup(group.id).subscribe((res) => {
-      alert(group.groupName + ' Group Deleted');
-      this.getAllGroups();
-    });
+    this.api.deleteGroup(group.id).subscribe(
+      (res) => {
+        this.getAllGroups();
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 
   logout() {
@@ -87,17 +90,25 @@ export class GroupsComponent implements OnInit {
   }
 
   deactivateGroup(group: Group) {
-    this.api.toggleGroupStatus(group.id, false).subscribe((res) => {
-      this.getAllGroups();
-      alert('group is inactive');
-    });
+    this.api.toggleGroupStatus(group.id, false).subscribe(
+      (res) => {
+        this.getAllGroups();
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 
   activateGroup(group: Group) {
-    this.api.toggleGroupStatus(group.id, true).subscribe((res) => {
-      this.getAllGroups();
-      alert('group is active');
-    });
+    this.api.toggleGroupStatus(group.id, true).subscribe(
+      (res) => {
+        this.getAllGroups();
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 
   openCreateContactModal(group: Group) {
@@ -109,11 +120,6 @@ export class GroupsComponent implements OnInit {
     this.contact.groupId = this.selectedGroup.id;
     this.api.createContact(this.contact).subscribe(
       (res) => {
-        console.log(res);
-        alert(
-          'Contact created Successfully for group ' +
-            this.selectedGroup.groupName
-        );
         let ref = document.getElementById('cancel');
         ref?.click();
         this.contactForm.reset();
@@ -134,10 +140,14 @@ export class GroupsComponent implements OnInit {
   editGroup(originalGroup: Group) {
     originalGroup.groupName = this.groupNameForEdit;
     delete originalGroup.isEditing;
-    this.api.editGroup(originalGroup).subscribe((res) => {
-      this.getAllGroups();
-      this.groupNameForEdit = '';
-      alert('group updated');
-    });
+    this.api.editGroup(originalGroup).subscribe(
+      (res) => {
+        this.getAllGroups();
+        this.groupNameForEdit = '';
+      },
+      (err) => {
+        alert('Something went wrong');
+      }
+    );
   }
 }
